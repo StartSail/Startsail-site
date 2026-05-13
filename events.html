@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Календарь событий — StartSail</title>
+  <meta name="description" content="Календарь событий StartSail: обучение, регаты и путешествия." />
+  <style>
+    :root {
+      --graphite: #586063;
+      --graphite-dark: #20282B;
+      --red: #8F2726;
+      --red-dark: #6F1E1E;
+      --bg: #F7F8F8;
+      --card: #FFFFFF;
+      --warm: #F2F0ED;
+      --line: rgba(32, 40, 43, .12);
+      --shadow: 0 18px 45px rgba(32, 40, 43, .09);
+      --radius: 24px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      color: var(--graphite-dark);
+      background: var(--bg);
+    }
+    a { color: inherit; text-decoration: none; }
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(247, 248, 248, .88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+    .header-inner {
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .logo img { width: 138px; display: block; }
+    .nav {
+      display: flex;
+      gap: 10px;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--graphite);
+    }
+    .nav a { padding: 10px 12px; border-radius: 999px; }
+    .nav a:hover { background: var(--warm); color: var(--graphite-dark); }
+    .nav .button { background: var(--red); color: white; }
+    .main {
+      width: min(1040px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 46px 0 70px;
+      min-height: calc(100vh - 76px);
+    }
+    .top {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 28px;
+    }
+    .eyebrow {
+      font-size: 13px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-weight: 900;
+      color: var(--red);
+      margin-bottom: 14px;
+    }
+    h1, h2, p { margin-top: 0; }
+    h1 {
+      font-size: clamp(42px, 6vw, 70px);
+      line-height: .95;
+      letter-spacing: -.055em;
+      margin-bottom: 14px;
+    }
+    .lead {
+      color: var(--graphite);
+      font-size: 19px;
+      line-height: 1.45;
+      margin-bottom: 0;
+      max-width: 680px;
+    }
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+    .filter {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: white;
+      color: var(--graphite-dark);
+      padding: 11px 14px;
+      border-radius: 999px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .filter.active {
+      background: var(--red);
+      border-color: var(--red);
+      color: white;
+    }
+    .events {
+      display: grid;
+      gap: 14px;
+    }
+    .event {
+      display: grid;
+      grid-template-columns: 180px 1fr auto;
+      gap: 22px;
+      align-items: center;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+    .date {
+      min-height: 108px;
+      border-radius: 18px;
+      background:
+        radial-gradient(circle at 85% 10%, rgba(255,255,255,.26), transparent 28%),
+        linear-gradient(135deg, var(--graphite), var(--red));
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 18px;
+      font-weight: 900;
+    }
+    .date .day { font-size: 24px; line-height: 1.05; letter-spacing: -.03em; }
+    .date .year { color: rgba(255,255,255,.72); margin-top: 5px; font-size: 13px; }
+    .event h2 {
+      font-size: 25px;
+      line-height: 1.1;
+      letter-spacing: -.035em;
+      margin-bottom: 10px;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      color: var(--graphite);
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: var(--warm);
+    }
+    .side {
+      display: grid;
+      gap: 8px;
+      justify-items: end;
+      text-align: right;
+      white-space: nowrap;
+    }
+    .places { font-weight: 900; font-size: 18px; color: var(--red); }
+    .price { font-weight: 900; font-size: 18px; color: var(--graphite-dark); }
+    .btn {
+      display: inline-flex;
+      min-height: 42px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 10px 16px;
+      background: var(--red);
+      color: white;
+      font-weight: 900;
+    }
+    .btn:hover { background: var(--red-dark); }
+    .message {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px;
+      color: var(--graphite);
+      box-shadow: var(--shadow);
+    }
+    .footer {
+      background: var(--graphite-dark);
+      color: white;
+      padding: 38px 0;
+    }
+    .footer-inner {
+      width: min(1040px, calc(100% - 32px));
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+    .footer h2 { margin-bottom: 12px; letter-spacing: -.025em; }
+    .footer p { color: rgba(255,255,255,.74); line-height: 1.55; margin-bottom: 8px; }
+    .contacts { display: grid; gap: 8px; justify-items: end; font-weight: 800; }
+    .contacts a, .contacts span { color: white; padding: 8px 0; }
+    .contacts small { color: rgba(255,255,255,.56); font-weight: 600; }
+    @media (max-width: 900px) {
+      .top { grid-template-columns: 1fr; align-items: start; }
+      .filters { justify-content: flex-start; }
+      .event { grid-template-columns: 1fr; }
+      .date { min-height: auto; }
+      .side { justify-items: start; text-align: left; white-space: normal; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .contacts { justify-items: start; }
+    }
+    @media (max-width: 520px) {
+      .header-inner { height: 68px; width: min(100% - 24px, 1040px); }
+      .main { width: min(100% - 24px, 1040px); padding-top: 30px; }
+      .logo img { width: 118px; }
+      .nav a:not(.button) { display: none; }
+      .filter { flex: 1 1 auto; }
+      .event { padding: 16px; border-radius: 20px; }
+      .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <a class="logo" href="index.html" aria-label="StartSail">
+        <img src="startsail-logo.jpg" alt="StartSail" />
+      </a>
+      <nav class="nav" aria-label="Навигация">
+        <a href="index.html">Главная</a>
+        <a href="#contacts" class="button">Контакты</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="top">
+      <div>
+        <div class="eyebrow">Events calendar</div>
+        <h1>Календарь событий</h1>
+        <p class="lead">Обучение, регаты и путешествия в хронологическом порядке. Данные загружаются из файла events_calendar.csv.</p>
+      </div>
+      <div class="filters" aria-label="Фильтр событий">
+        <button class="filter active" type="button" data-filter="all">Все</button>
+        <button class="filter" type="button" data-filter="training">Обучение</button>
+        <button class="filter" type="button" data-filter="regatta">Регаты</button>
+        <button class="filter" type="button" data-filter="trip">Путешествия</button>
+      </div>
+    </section>
+
+    <section class="events" id="events" aria-live="polite">
+      <div class="message">Загружаю события…</div>
+    </section>
+  </main>
+
+  <footer class="footer" id="contacts">
+    <div class="footer-inner">
+      <div>
+        <h2>Контакты</h2>
+        <p>Напишите, если хотите записаться на курс, уточнить свободные места или обсудить участие в регате.</p>
+      </div>
+      <div class="contacts">
+        <a href="mailto:info@startsail.ru">info@startsail.ru</a>
+        <span>Instagram: @start.sail</span>
+        <span>Telegram: StartSail</span>
+        <small>StartSail · Montenegro</small>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const CSV_URL = 'events_calendar.csv';
+    const eventsContainer = document.getElementById('events');
+    const embeddedCsvFallback = `date_start;date_end;title;type;location;principal;total_places;free_places;published
+29.08.2026;12.09.2026;IYT BBS + IYT VHF operator;training;Тиват;Павел Кучерков;3;3;yes
+12.05.2026;25.05.2026;Marmaris International Race Weeek;regatta;Мармарис;Павел Кучерков;10;7;yes
+14.06.2026;21.06.2026;Hemithea regatta;regatta;Мармарис;Павел Кучерков;10;7;yes
+05.09.2026;12.09.2026;Gocek Autumn Race Week;regatta;Гечек;Павел Кучерков;10;8;yes`;
+    const filters = Array.from(document.querySelectorAll('.filter'));
+    let allEvents = [];
+    let currentFilter = 'all';
+
+    function decodeWindows1251(buffer) {
+      const bytes = new Uint8Array(buffer);
+      const cp1251 = [
+        0x0402,0x0403,0x201A,0x0453,0x201E,0x2026,0x2020,0x2021,
+        0x20AC,0x2030,0x0409,0x2039,0x040A,0x040C,0x040B,0x040F,
+        0x0452,0x2018,0x2019,0x201C,0x201D,0x2022,0x2013,0x2014,
+        0x0098,0x2122,0x0459,0x203A,0x045A,0x045C,0x045B,0x045F,
+        0x00A0,0x040E,0x045E,0x0408,0x00A4,0x0490,0x00A6,0x00A7,
+        0x0401,0x00A9,0x0404,0x00AB,0x00AC,0x00AD,0x00AE,0x0407,
+        0x00B0,0x00B1,0x0406,0x0456,0x0491,0x00B5,0x00B6,0x00B7,
+        0x0451,0x2116,0x0454,0x00BB,0x0458,0x0405,0x0455,0x0457
+      ];
+      let text = '';
+      for (const byte of bytes) {
+        if (byte < 128) {
+          text += String.fromCharCode(byte);
+        } else if (byte >= 192) {
+          text += String.fromCharCode(0x0410 + byte - 192);
+        } else {
+          text += String.fromCharCode(cp1251[byte - 128]);
+        }
+      }
+      return text;
+    }
+
+    function splitCsvLine(line) {
+      const cells = [];
+      let cell = '';
+      let inQuotes = false;
+      for (let i = 0; i < line.length; i++) {
+        const char = line[i];
+        const next = line[i + 1];
+        if (char === '"' && inQuotes && next === '"') {
+          cell += '"';
+          i++;
+        } else if (char === '"') {
+          inQuotes = !inQuotes;
+        } else if (char === ';' && !inQuotes) {
+          cells.push(cell.trim());
+          cell = '';
+        } else {
+          cell += char;
+        }
+      }
+      cells.push(cell.trim());
+      return cells;
+    }
+
+    function parseCsv(text) {
+      const lines = text.replace(/^\uFEFF/, '').split(/\r?\n/).filter(line => line.trim() !== '');
+      if (lines.length < 2) return [];
+      const headers = splitCsvLine(lines[0]);
+      return lines.slice(1).map(line => {
+        const values = splitCsvLine(line);
+        const item = {};
+        headers.forEach((header, index) => {
+          item[header] = values[index] ?? '';
+        });
+        return normalizeEvent(item);
+      });
+    }
+
+    function normalizeEvent(item) {
+      return {
+        date_start: item.date_start || '',
+        date_end: item.date_end || '',
+        title: item.title || '',
+        type: item.type || '',
+        location: item.location || '',
+        leader: item.leader || item.principal || '',
+        price: item.price || '',
+        total_places: Number(item.total_places || 0),
+        free_places: Number(item.free_places || 0),
+        published: String(item.published || '').toLowerCase() === 'yes'
+      };
+    }
+
+    function parseDate(dateString) {
+      const [day, month, year] = dateString.split('.').map(Number);
+      return new Date(year, month - 1, day);
+    }
+
+    function formatDateRange(start, end) {
+      const [sd, sm, sy] = start.split('.');
+      const [ed, em, ey] = end.split('.');
+      if (!start || !end) return '';
+      if (sy === ey) {
+        return `${sd}.${sm}–${ed}.${em}`;
+      }
+      return `${start}–${end}`;
+    }
+
+    function yearFromDate(dateString) {
+      return dateString.split('.')[2] || '';
+    }
+
+    function typeLabel(type) {
+      const labels = {
+        training: 'Обучение',
+        regatta: 'Регата',
+        trip: 'Путешествие'
+      };
+      return labels[type] || type;
+    }
+
+    function priceLabel(price) {
+      const clean = String(price || '').trim();
+      if (!clean) return '';
+      if (/€|eur|EUR/.test(clean)) return clean;
+      return `${clean} €`;
+    }
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>'"]/g, char => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        "'": '&#039;',
+        '"': '&quot;'
+      }[char]));
+    }
+
+    function renderEvents() {
+      const visible = allEvents
+        .filter(event => event.published)
+        .filter(event => currentFilter === 'all' || event.type === currentFilter)
+        .sort((a, b) => parseDate(a.date_start) - parseDate(b.date_start));
+
+      if (!visible.length) {
+        eventsContainer.innerHTML = '<div class="message">Событий в этом разделе пока нет.</div>';
+        return;
+      }
+
+      eventsContainer.innerHTML = visible.map(event => {
+        const price = priceLabel(event.price);
+        return `
+          <article class="event">
+            <div class="date">
+              <div class="day">${escapeHtml(formatDateRange(event.date_start, event.date_end))}</div>
+              <div class="year">${escapeHtml(yearFromDate(event.date_start))}</div>
+            </div>
+            <div>
+              <h2>${escapeHtml(event.title)}</h2>
+              <div class="meta">
+                <span class="pill">${escapeHtml(typeLabel(event.type))}</span>
+                <span class="pill">${escapeHtml(event.location)}</span>
+                <span class="pill">Ведущий: ${escapeHtml(event.leader)}</span>
+              </div>
+            </div>
+            <div class="side">
+              ${price ? `<div class="price">${escapeHtml(price)}</div>` : ''}
+              <div class="places">Свободно ${event.free_places} из ${event.total_places}</div>
+              <a class="btn" href="mailto:info@startsail.ru?subject=${encodeURIComponent('Запись на ' + event.title)}">Записаться</a>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    filters.forEach(button => {
+      button.addEventListener('click', () => {
+        currentFilter = button.dataset.filter;
+        filters.forEach(item => item.classList.toggle('active', item === button));
+        renderEvents();
+      });
+    });
+
+    async function loadEvents() {
+      try {
+        const response = await fetch(CSV_URL + '?v=' + Date.now(), { cache: 'no-store' });
+        if (!response.ok) throw new Error('CSV не найден');
+        const buffer = await response.arrayBuffer();
+        const text = decodeWindows1251(buffer);
+        allEvents = parseCsv(text);
+        renderEvents();
+      } catch (error) {
+        allEvents = parseCsv(embeddedCsvFallback);
+        renderEvents();
+        const warning = document.createElement('div');
+        warning.className = 'message';
+        warning.style.marginBottom = '14px';
+        warning.textContent = 'events_calendar.csv не загрузился. Если страница открыта прямо с компьютера двойным кликом, браузер блокирует чтение локального CSV. На хостинге файл должен лежать рядом с events.html. Ниже показана встроенная резервная копия.';
+        eventsContainer.prepend(warning);
+      }
+    }
+
+    loadEvents();
+  </script>
+</body>
+</html>
