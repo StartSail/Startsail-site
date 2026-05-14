@@ -232,7 +232,7 @@
   <header class="header">
     <div class="header-inner">
       <a class="logo" href="index.html" aria-label="StartSail">
-        <img src="startsail-logo.jpg" alt="StartSail" />
+        <img src="startsail-logo.svg" alt="StartSail" />
       </a>
       <nav class="nav" aria-label="Навигация">
         <a href="index.html">Главная</a>
@@ -278,40 +278,11 @@
 
   <script>
     const CSV_URL = 'events_calendar.csv';
+    const decoderEncoding = 'windows-1251';
     const eventsContainer = document.getElementById('events');
-    const embeddedCsvFallback = `date_start;date_end;title;type;location;principal;total_places;free_places;published
-29.08.2026;12.09.2026;IYT BBS + IYT VHF operator;training;Тиват;Павел Кучерков;3;3;yes
-12.05.2026;25.05.2026;Marmaris International Race Weeek;regatta;Мармарис;Павел Кучерков;10;7;yes
-14.06.2026;21.06.2026;Hemithea regatta;regatta;Мармарис;Павел Кучерков;10;7;yes
-05.09.2026;12.09.2026;Gocek Autumn Race Week;regatta;Гечек;Павел Кучерков;10;8;yes`;
     const filters = Array.from(document.querySelectorAll('.filter'));
     let allEvents = [];
     let currentFilter = 'all';
-
-    function decodeWindows1251(buffer) {
-      const bytes = new Uint8Array(buffer);
-      const cp1251 = [
-        0x0402,0x0403,0x201A,0x0453,0x201E,0x2026,0x2020,0x2021,
-        0x20AC,0x2030,0x0409,0x2039,0x040A,0x040C,0x040B,0x040F,
-        0x0452,0x2018,0x2019,0x201C,0x201D,0x2022,0x2013,0x2014,
-        0x0098,0x2122,0x0459,0x203A,0x045A,0x045C,0x045B,0x045F,
-        0x00A0,0x040E,0x045E,0x0408,0x00A4,0x0490,0x00A6,0x00A7,
-        0x0401,0x00A9,0x0404,0x00AB,0x00AC,0x00AD,0x00AE,0x0407,
-        0x00B0,0x00B1,0x0406,0x0456,0x0491,0x00B5,0x00B6,0x00B7,
-        0x0451,0x2116,0x0454,0x00BB,0x0458,0x0405,0x0455,0x0457
-      ];
-      let text = '';
-      for (const byte of bytes) {
-        if (byte < 128) {
-          text += String.fromCharCode(byte);
-        } else if (byte >= 192) {
-          text += String.fromCharCode(0x0410 + byte - 192);
-        } else {
-          text += String.fromCharCode(cp1251[byte - 128]);
-        }
-      }
-      return text;
-    }
 
     function splitCsvLine(line) {
       const cells = [];
@@ -457,20 +428,14 @@
 
     async function loadEvents() {
       try {
-        const response = await fetch(CSV_URL + '?v=' + Date.now(), { cache: 'no-store' });
+        const response = await fetch(CSV_URL, { cache: 'no-store' });
         if (!response.ok) throw new Error('CSV не найден');
         const buffer = await response.arrayBuffer();
-        const text = decodeWindows1251(buffer);
+        const text = new TextDecoder(decoderEncoding).decode(buffer);
         allEvents = parseCsv(text);
         renderEvents();
       } catch (error) {
-        allEvents = parseCsv(embeddedCsvFallback);
-        renderEvents();
-        const warning = document.createElement('div');
-        warning.className = 'message';
-        warning.style.marginBottom = '14px';
-        warning.textContent = 'events_calendar.csv не загрузился. Если страница открыта прямо с компьютера двойным кликом, браузер блокирует чтение локального CSV. На хостинге файл должен лежать рядом с events.html. Ниже показана встроенная резервная копия.';
-        eventsContainer.prepend(warning);
+        eventsContainer.innerHTML = '<div class="message">Не удалось загрузить events_calendar.csv. Проверьте, что файл лежит рядом с events.html на хостинге.</div>';
       }
     }
 
