@@ -529,7 +529,7 @@ h1  {
               </div>
             </div>
             <div class="side">
-              ${price ? `<div class="price">${escapeHtml(price)}</div>` : ''}
+              ${price ? `<div class="price">Стоимость: ${escapeHtml(price)}</div>` : ''}
               <div class="places">Свободно ${event.free_places} из ${event.total_places}</div>
               <a class="btn" href="mailto:info@startsail.ru?subject=${encodeURIComponent('Запись на ' + event.title)}">Записаться</a>
             </div>
