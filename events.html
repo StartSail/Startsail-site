@@ -318,6 +318,43 @@ h1  {
     width: 100%;
   }
 }
+
+    .mail-fallback {
+      margin-top: 18px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 24px;
+      display: none;
+    }
+
+    .mail-fallback.visible {
+      display: block;
+    }
+
+    .mail-fallback p {
+      margin: 0 0 14px;
+      color: var(--graphite);
+      line-height: 1.5;
+    }
+
+    .mail-fallback .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .copy-note {
+      margin-top: 10px;
+      color: var(--red);
+      font-weight: 900;
+      display: none;
+    }
+
+    .copy-note.visible {
+      display: block;
+    }
   </style>
  </head>
  <body>
@@ -369,6 +406,25 @@ h1  {
      Загружаю события…
     </div>
    </section>
+   <section class="mail-fallback" id="mailFallback" aria-live="polite">
+    <p>
+     Если почтовая программа не открылась, напишите удобным способом или скопируйте email.
+    </p>
+    <div class="actions">
+     <a class="btn" href="https://t.me/StartSail" target="_blank" rel="noopener">
+      Telegram
+     </a>
+     <a class="btn" href="https://www.instagram.com/start.sail/" target="_blank" rel="noopener">
+      Instagram
+     </a>
+     <button class="btn" type="button" onclick="copyEmail()">
+      Скопировать email
+     </button>
+    </div>
+    <div class="copy-note" id="copyNote">
+     Email скопирован: info@startsail.ru
+    </div>
+   </section>
   </main>
   <footer class="footer" id="contacts">
    <div class="footer-inner">
@@ -384,12 +440,12 @@ h1  {
      <a href="mailto:info@startsail.ru">
       info@startsail.ru
      </a>
-     <span>
+     <a href="https://www.instagram.com/start.sail/" target="_blank" rel="noopener">
       Instagram: @start.sail
-     </span>
-     <span>
+     </a>
+     <a href="https://t.me/StartSail" target="_blank" rel="noopener">
       Telegram: StartSail
-     </span>
+     </a>
      <small>
       StartSail · Montenegro
      </small>
@@ -403,7 +459,34 @@ h1  {
     const filters = Array.from(document.querySelectorAll('.filter'));
     let allEvents = [];
     let currentFilter = 'all';
+let mailFallbackTimer = null;
 
+    function showMailFallback() {
+      window.clearTimeout(mailFallbackTimer);
+      mailFallbackTimer = window.setTimeout(() => {
+        const fallback = document.getElementById('mailFallback');
+        if (fallback) {
+          fallback.classList.add('visible');
+          fallback.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      }, 900);
+    }
+
+    function copyEmail() {
+      const email = 'info@startsail.ru';
+      const note = document.getElementById('copyNote');
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(email).then(() => {
+          if (note) note.classList.add('visible');
+        }).catch(() => {
+          window.prompt('Скопируйте email:', email);
+        });
+      } else {
+        window.prompt('Скопируйте email:', email);
+      }
+    }
+
+    
     function splitCsvLine(line) {
       const cells = [];
       let cell = '';
@@ -531,7 +614,7 @@ h1  {
             <div class="side">
               ${price ? `<div class="price">Стоимость: ${escapeHtml(price)}</div>` : ''}
               <div class="places">Свободно ${event.free_places} из ${event.total_places}</div>
-              <a class="btn" href="mailto:info@startsail.ru?subject=${encodeURIComponent('Запись на ' + event.title)}">Записаться</a>
+              <a class="btn" href="mailto:info@startsail.ru?subject=${encodeURIComponent('Запись на ' + event.title)}" onclick="showMailFallback()">Записаться</a>
             </div>
           </article>
         `;
