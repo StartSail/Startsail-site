@@ -1,286 +1,403 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="Expires" content="0" />
-  <title>Календарь событий — StartSail</title>
-  <meta name="description" content="Календарь событий StartSail: обучение, регаты и путешествия." />
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="no-cache, no-store, must-revalidate" http-equiv="Cache-Control"/>
+  <meta content="no-cache" http-equiv="Pragma"/>
+  <meta content="0" http-equiv="Expires"/>
+  <title>
+   Календарь событий — StartSail
+  </title>
+  <meta content="Календарь событий StartSail: обучение, регаты и путешествия." name="description"/>
   <style>
-    :root {
-      --graphite: #586063;
-      --graphite-dark: #20282B;
-      --red: #8F2726;
-      --red-dark: #6F1E1E;
-      --bg: #F7F8F8;
-      --card: #FFFFFF;
-      --warm: #F2F0ED;
-      --line: rgba(32, 40, 43, .12);
-      --shadow: 0 18px 45px rgba(32, 40, 43, .09);
-      --radius: 24px;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Inter, Arial, Helvetica, sans-serif;
-      color: var(--graphite-dark);
-      background: var(--bg);
-    }
-    a { color: inherit; text-decoration: none; }
-    .header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: rgba(247, 248, 248, .88);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--line);
-    }
-    .header-inner {
-      width: min(1160px, calc(100% - 32px));
-      margin: 0 auto;
-      height: 76px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-    .logo img { width: 138px; display: block; }
-    .nav {
-      display: flex;
-      gap: 10px;
-      font-size: 14px;
-      font-weight: 800;
-      color: var(--graphite);
-    }
-    .nav a { padding: 10px 12px; border-radius: 999px; }
-    .nav a:hover { background: var(--warm); color: var(--graphite-dark); }
-    .nav .button { background: var(--red); color: white; }
-    .main {
-      width: min(1040px, calc(100% - 32px));
-      margin: 0 auto;
-      padding: 46px 0 70px;
-      min-height: calc(100vh - 76px);
-    }
-    .top {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 24px;
-      align-items: end;
-      margin-bottom: 28px;
-    }
-    .eyebrow {
-      font-size: 13px;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      font-weight: 900;
-      color: var(--red);
-      margin-bottom: 14px;
-    }
-    h1, h2, p { margin-top: 0; }
-    h1 {
-      font-size: clamp(42px, 6vw, 70px);
-      line-height: .95;
-      letter-spacing: -.055em;
-      margin-bottom: 14px;
-    }
-    .lead {
-      color: var(--graphite);
-      font-size: 19px;
-      line-height: 1.45;
-      margin-bottom: 0;
-      max-width: 680px;
-    }
-    .filters {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      justify-content: flex-end;
-    }
-    .filter {
-      appearance: none;
-      border: 1px solid var(--line);
-      background: white;
-      color: var(--graphite-dark);
-      padding: 11px 14px;
-      border-radius: 999px;
-      font-weight: 800;
-      cursor: pointer;
-    }
-    .filter.active {
-      background: var(--red);
-      border-color: var(--red);
-      color: white;
-    }
-    .events {
-      display: grid;
-      gap: 14px;
-    }
-    .event {
-      display: grid;
-      grid-template-columns: 180px 1fr auto;
-      gap: 22px;
-      align-items: center;
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 22px;
-    }
-    .date {
-      min-height: 108px;
-      border-radius: 18px;
-      background:
-        radial-gradient(circle at 85% 10%, rgba(255,255,255,.26), transparent 28%),
-        linear-gradient(135deg, var(--graphite), var(--red));
-      color: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 18px;
-      font-weight: 900;
-    }
-    .date .day { font-size: 24px; line-height: 1.05; letter-spacing: -.03em; }
-    .date .year { color: rgba(255,255,255,.72); margin-top: 5px; font-size: 13px; }
-    .event h2 {
-      font-size: 25px;
-      line-height: 1.1;
-      letter-spacing: -.035em;
-      margin-bottom: 10px;
-    }
-    .meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      color: var(--graphite);
-      font-size: 14px;
-      font-weight: 700;
-    }
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      padding: 7px 10px;
-      border-radius: 999px;
-      background: var(--warm);
-    }
-    .side {
-      display: grid;
-      gap: 8px;
-      justify-items: end;
-      text-align: right;
-      white-space: nowrap;
-    }
-    .places { font-weight: 900; font-size: 18px; color: var(--red); }
-    .price { font-weight: 900; font-size: 18px; color: var(--graphite-dark); }
-    .btn {
-      display: inline-flex;
-      min-height: 42px;
-      align-items: center;
-      justify-content: center;
-      border-radius: 999px;
-      padding: 10px 16px;
-      background: var(--red);
-      color: white;
-      font-weight: 900;
-    }
-    .btn:hover { background: var(--red-dark); }
-    .message {
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 24px;
-      color: var(--graphite);
-      box-shadow: var(--shadow);
-    }
-    .footer {
-      background: var(--graphite-dark);
-      color: white;
-      padding: 38px 0;
-    }
-    .footer-inner {
-      width: min(1040px, calc(100% - 32px));
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 22px;
-      align-items: start;
-    }
-    .footer h2 { margin-bottom: 12px; letter-spacing: -.025em; }
-    .footer p { color: rgba(255,255,255,.74); line-height: 1.55; margin-bottom: 8px; }
-    .contacts { display: grid; gap: 8px; justify-items: end; font-weight: 800; }
-    .contacts a, .contacts span { color: white; padding: 8px 0; }
-    .contacts small { color: rgba(255,255,255,.56); font-weight: 600; }
-    @media (max-width: 900px) {
-      .top { grid-template-columns: 1fr; align-items: start; }
-      .filters { justify-content: flex-start; }
-      .event { grid-template-columns: 1fr; }
-      .date { min-height: auto; }
-      .side { justify-items: start; text-align: left; white-space: normal; }
-      .footer-inner { grid-template-columns: 1fr; }
-      .contacts { justify-items: start; }
-    }
-    @media (max-width: 520px) {
-      .header-inner { height: 68px; width: min(100% - 24px, 1040px); }
-      .main { width: min(100% - 24px, 1040px); padding-top: 30px; }
-      .logo img { width: 118px; }
-      .nav a:not(.button) { display: none; }
-      .filter { flex: 1 1 auto; }
-      .event { padding: 16px; border-radius: 20px; }
-      .btn { width: 100%; }
-    }
+   :root  {
+  --graphite: #586063;
+  --graphite-dark: #20282B;
+  --red: #8F2726;
+  --red-dark: #6F1E1E;
+  --bg: #F7F8F8;
+  --card: #FFFFFF;
+  --warm: #F2F0ED;
+  --line: rgba(32,  40,  43,  .12);
+  --shadow: 0 18px 45px rgba(32,  40,  43,  .09);
+  --radius: 24px;
+}
+*  {
+  box-sizing: border-box;
+}
+body  {
+  margin: 0;
+  font-family: Inter,  Arial,  Helvetica,  sans-serif;
+  color: var(--graphite-dark);
+  background: var(--bg);
+}
+a  {
+  color: inherit;
+  text-decoration: none;
+}
+.header  {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(247,  248,  248,  .88);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.header-inner  {
+  width: min(1160px,  calc(100% - 32px));
+  margin: 0 auto;
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.logo img  {
+  width: 138px;
+  display: block;
+}
+.nav  {
+  display: flex;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--graphite);
+}
+.nav a  {
+  padding: 10px 12px;
+  border-radius: 999px;
+}
+.nav a:hover  {
+  background: var(--warm);
+  color: var(--graphite-dark);
+}
+.nav .button  {
+  background: var(--red);
+  color: white;
+}
+.main  {
+  width: min(1040px,  calc(100% - 32px));
+  margin: 0 auto;
+  padding: 46px 0 70px;
+  min-height: calc(100vh - 76px);
+}
+.top  {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: end;
+  margin-bottom: 28px;
+}
+.eyebrow  {
+  font-size: 13px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-weight: 900;
+  color: var(--red);
+  margin-bottom: 14px;
+}
+h1,  h2,  p  {
+  margin-top: 0;
+}
+h1  {
+  font-size: clamp(42px,  6vw,  70px);
+  line-height: .95;
+  letter-spacing: -.055em;
+  margin-bottom: 14px;
+}
+.lead  {
+  color: var(--graphite);
+  font-size: 19px;
+  line-height: 1.45;
+  margin-bottom: 0;
+  max-width: 680px;
+}
+.filters  {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+.filter  {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: white;
+  color: var(--graphite-dark);
+  padding: 11px 14px;
+  border-radius: 999px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.filter.active  {
+  background: var(--red);
+  border-color: var(--red);
+  color: white;
+}
+.events  {
+  display: grid;
+  gap: 14px;
+}
+.event  {
+  display: grid;
+  grid-template-columns: 180px 1fr auto;
+  gap: 22px;
+  align-items: center;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 22px;
+}
+.date  {
+  min-height: 108px;
+  border-radius: 18px;
+  background: radial-gradient(circle at 85% 10%,  rgba(255, 255, 255, .26),  transparent 28%),  linear-gradient(135deg,  var(--graphite),  var(--red));
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 18px;
+  font-weight: 900;
+}
+.date .day  {
+  font-size: 24px;
+  line-height: 1.05;
+  letter-spacing: -.03em;
+}
+.date .year  {
+  color: rgba(255, 255, 255, .72);
+  margin-top: 5px;
+  font-size: 13px;
+}
+.event h2  {
+  font-size: 25px;
+  line-height: 1.1;
+  letter-spacing: -.035em;
+  margin-bottom: 10px;
+}
+.meta  {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  color: var(--graphite);
+  font-size: 14px;
+  font-weight: 700;
+}
+.pill  {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: var(--warm);
+}
+.side  {
+  display: grid;
+  gap: 8px;
+  justify-items: end;
+  text-align: right;
+  white-space: nowrap;
+}
+.places  {
+  font-weight: 900;
+  font-size: 18px;
+  color: var(--red);
+}
+.price  {
+  font-weight: 900;
+  font-size: 18px;
+  color: var(--graphite-dark);
+}
+.btn  {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 10px 16px;
+  background: var(--red);
+  color: white;
+  font-weight: 900;
+}
+.btn:hover  {
+  background: var(--red-dark);
+}
+.message  {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 24px;
+  color: var(--graphite);
+  box-shadow: var(--shadow);
+}
+.footer  {
+  background: var(--graphite-dark);
+  color: white;
+  padding: 38px 0;
+}
+.footer-inner  {
+  width: min(1040px,  calc(100% - 32px));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  align-items: start;
+}
+.footer h2  {
+  margin-bottom: 12px;
+  letter-spacing: -.025em;
+}
+.footer p  {
+  color: rgba(255, 255, 255, .74);
+  line-height: 1.55;
+  margin-bottom: 8px;
+}
+.contacts  {
+  display: grid;
+  gap: 8px;
+  justify-items: end;
+  font-weight: 800;
+}
+.contacts a,  .contacts span  {
+  color: white;
+  padding: 8px 0;
+}
+.contacts small  {
+  color: rgba(255, 255, 255, .56);
+  font-weight: 600;
+}
+@media (max-width: 900px)  {
+  .top  {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+  .filters  {
+    justify-content: flex-start;
+  }
+  .event  {
+    grid-template-columns: 1fr;
+  }
+  .date  {
+    min-height: auto;
+  }
+  .side  {
+    justify-items: start;
+    text-align: left;
+    white-space: normal;
+  }
+  .footer-inner  {
+    grid-template-columns: 1fr;
+  }
+  .contacts  {
+    justify-items: start;
+  }
+}
+@media (max-width: 520px)  {
+  .header-inner  {
+    height: 68px;
+    width: min(100% - 24px,  1040px);
+  }
+  .main  {
+    width: min(100% - 24px,  1040px);
+    padding-top: 30px;
+  }
+  .logo img  {
+    width: 118px;
+  }
+  .nav a:not(.button)  {
+    display: none;
+  }
+  .filter  {
+    flex: 1 1 auto;
+  }
+  .event  {
+    padding: 16px;
+    border-radius: 20px;
+  }
+  .btn  {
+    width: 100%;
+  }
+}
   </style>
-</head>
-<body>
+ </head>
+ <body>
   <header class="header">
-    <div class="header-inner">
-      <a class="logo" href="index.html" aria-label="StartSail">
-        <img src="startsail-logo.svg" alt="StartSail" />
-      </a>
-      <nav class="nav" aria-label="Навигация">
-        <a href="index.html">Главная</a>
-        <a href="#contacts" class="button">Контакты</a>
-      </nav>
-    </div>
+   <div class="header-inner">
+    <a aria-label="StartSail" class="logo" href="index.html">
+     <img alt="StartSail" src="startsail-logo.svg"/>
+    </a>
+    <nav aria-label="Навигация" class="nav">
+     <a href="index.html">
+      Главная
+     </a>
+     <a class="button" href="#contacts">
+      Контакты
+     </a>
+    </nav>
+   </div>
   </header>
-
   <main class="main">
-    <section class="top">
-      <div>
-        <div class="eyebrow">Events calendar</div>
-        <h1>Календарь событий</h1>
-        <p class="lead">Обучение, регаты и путешествия в хронологическом порядке. Данные загружаются из файла events_calendar.csv.</p>
-      </div>
-      <div class="filters" aria-label="Фильтр событий">
-        <button class="filter active" type="button" data-filter="all">Все</button>
-        <button class="filter" type="button" data-filter="training">Обучение</button>
-        <button class="filter" type="button" data-filter="regatta">Регаты</button>
-        <button class="filter" type="button" data-filter="trip">Путешествия</button>
-      </div>
-    </section>
-
-    <section class="events" id="events" aria-live="polite">
-      <div class="message">Загружаю события…</div>
-    </section>
-  </main>
-
-  <footer class="footer" id="contacts">
-    <div class="footer-inner">
-      <div>
-        <h2>Контакты</h2>
-        <p>Напишите, если хотите записаться на курс, уточнить свободные места или обсудить участие в регате.</p>
-      </div>
-      <div class="contacts">
-        <a href="mailto:info@startsail.ru">info@startsail.ru</a>
-        <span>Instagram: @start.sail</span>
-        <span>Telegram: StartSail</span>
-        <small>StartSail · Montenegro</small>
-      </div>
+   <section class="top">
+    <div>
+     <div class="eyebrow">
+      Events calendar
+     </div>
+     <h1>
+      Календарь событий
+     </h1>
+     <p class="lead">
+      Обучение, регаты и путешествия. Выбирай и записывайся!
+     </p>
     </div>
+    <div aria-label="Фильтр событий" class="filters">
+     <button class="filter active" data-filter="all" type="button">
+      Все
+     </button>
+     <button class="filter" data-filter="training" type="button">
+      Обучение
+     </button>
+     <button class="filter" data-filter="regatta" type="button">
+      Регаты
+     </button>
+     <button class="filter" data-filter="trip" type="button">
+      Путешествия
+     </button>
+    </div>
+   </section>
+   <section aria-live="polite" class="events" id="events">
+    <div class="message">
+     Загружаю события…
+    </div>
+   </section>
+  </main>
+  <footer class="footer" id="contacts">
+   <div class="footer-inner">
+    <div>
+     <h2>
+      Контакты
+     </h2>
+     <p>
+      Напишите, если хотите записаться на курс, уточнить свободные места или обсудить участие в регате.
+     </p>
+    </div>
+    <div class="contacts">
+     <a href="mailto:info@startsail.ru">
+      info@startsail.ru
+     </a>
+     <span>
+      Instagram: @start.sail
+     </span>
+     <span>
+      Telegram: StartSail
+     </span>
+     <small>
+      StartSail · Montenegro
+     </small>
+    </div>
+   </div>
   </footer>
-
   <script>
-    const CSV_URL = 'events_calendar.csv';
+   const CSV_URL = 'events_calendar.csv';
     const decoderEncoding = 'windows-1251';
     const eventsContainer = document.getElementById('events');
     const filters = Array.from(document.querySelectorAll('.filter'));
@@ -444,5 +561,5 @@
 
     loadEvents();
   </script>
-</body>
+ </body>
 </html>

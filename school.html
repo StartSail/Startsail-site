@@ -1,86 +1,752 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="Expires" content="0" />
-  <title>Школа — StartSail</title>
-  <meta name="description" content="Парусная школа StartSail в Тивате, Черногория. Обучение яхтингу в сердце Адриатики." />
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="no-cache, no-store, must-revalidate" http-equiv="Cache-Control"/>
+  <meta content="no-cache" http-equiv="Pragma"/>
+  <meta content="0" http-equiv="Expires"/>
+  <title>
+   Школа — StartSail
+  </title>
+  <meta content="Парусная школа StartSail в Тивате, Черногория. Обучение яхтингу в сердце Адриатики." name="description"/>
   <style>
-:root{--graphite:#586063;--graphite-dark:#20282B;--red:#8F2726;--red-dark:#6F1E1E;--bg:#F7F8F8;--card:#fff;--warm:#F2F0ED;--line:rgba(32,40,43,.12);--shadow:0 18px 45px rgba(32,40,43,.09);--radius:24px}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;color:var(--graphite-dark);background:var(--bg)}a{color:inherit;text-decoration:none}.header{position:sticky;top:0;z-index:10;background:rgba(247,248,248,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}.header-inner{width:min(1160px,calc(100% - 32px));margin:0 auto;height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}.logo img{width:138px;display:block}.nav{display:flex;gap:10px;font-size:14px;font-weight:900;color:var(--graphite);white-space:nowrap}.nav a{padding:10px 12px;border-radius:999px}.nav a:hover{background:var(--warm);color:var(--graphite-dark)}.nav .button{background:var(--red);color:white}.nav .button:hover{background:var(--red-dark);color:white}.main{width:min(1160px,calc(100% - 32px));margin:0 auto;padding:34px 0 72px}.eyebrow{font-size:13px;letter-spacing:.12em;text-transform:uppercase;font-weight:900;color:var(--red);margin-bottom:14px}h1,h2,h3,p{margin-top:0}h1{font-size:clamp(42px,7vw,78px);line-height:.94;letter-spacing:-.055em;margin-bottom:20px}h2{font-size:clamp(28px,4vw,48px);line-height:1;letter-spacing:-.045em;margin-bottom:14px}h3{font-size:22px;line-height:1.1;letter-spacing:-.03em;margin-bottom:10px}.lead{max-width:720px;font-size:clamp(18px,2.3vw,25px);line-height:1.34;color:var(--graphite);margin-bottom:28px}.text{font-size:18px;line-height:1.58;color:var(--graphite);max-width:820px}.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:stretch;margin-bottom:28px}.intro{min-height:470px;border-radius:28px;padding:clamp(28px,5vw,58px);background:radial-gradient(circle at 92% 16%,rgba(143,39,38,.18),transparent 30%),linear-gradient(135deg,#fff 0%,#F2F0ED 100%);box-shadow:0 22px 55px rgba(32,40,43,.12);display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;position:relative}.intro:after{content:"";position:absolute;right:-90px;bottom:-120px;width:360px;height:460px;background:var(--graphite);clip-path:polygon(84% 0,100% 72%,0 88%);opacity:.13;transform:rotate(7deg);pointer-events:none}.actions{display:flex;flex-wrap:wrap;gap:12px}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:13px 20px;border-radius:999px;font-weight:900;font-size:15px;border:1px solid transparent;cursor:pointer}.btn-primary{background:var(--red);color:white}.btn-primary:hover{background:var(--red-dark)}.btn-secondary{border-color:var(--line);background:white;color:var(--graphite-dark)}.btn-secondary:hover{background:var(--warm)}.photo-card{min-height:470px;border-radius:28px;padding:28px;box-shadow:0 22px 55px rgba(32,40,43,.12);color:white;background:linear-gradient(0deg,rgba(32,40,43,.78),rgba(32,40,43,.12)),url("img/adriatic-practice.jpg") center/cover no-repeat;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;position:relative}.photo-card:after{content:"";position:absolute;right:-90px;bottom:-120px;width:360px;height:460px;background:var(--red);clip-path:polygon(84% 0,100% 72%,0 88%);opacity:.16;transform:rotate(7deg);pointer-events:none}.photo-card h2,.photo-card p{position:relative;z-index:1}.photo-card p{max-width:430px;color:rgba(255,255,255,.82);font-size:17px;line-height:1.45;margin:0}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{min-height:330px;border-radius:24px;background:white;box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;border:1px solid var(--line)}.card-visual{min-height:150px;background:radial-gradient(circle at 78% 18%,rgba(255,255,255,.3),transparent 22%),linear-gradient(135deg,var(--graphite),var(--red));position:relative}.card-visual.school{background:linear-gradient(0deg,rgba(32,40,43,.28),rgba(32,40,43,.04)),linear-gradient(135deg,#7B8588,#D7D8D5)}.card-visual.iyt{background:linear-gradient(0deg,rgba(32,40,43,.35),rgba(32,40,43,.05)),linear-gradient(135deg,#20282B,#586063)}.card-visual.calendar{background:linear-gradient(0deg,rgba(32,40,43,.28),rgba(32,40,43,.05)),linear-gradient(135deg,#8F2726,#B96E5D)}.card-visual:after{content:"";position:absolute;right:24px;bottom:-22px;width:116px;height:140px;background:rgba(255,255,255,.55);clip-path:polygon(84% 0,100% 78%,0 88%);transform:rotate(6deg)}.card-body{flex:1;padding:24px;display:flex;flex-direction:column;justify-content:space-between;gap:18px}.card h2{font-size:25px;line-height:1.05;letter-spacing:-.035em;margin-bottom:12px}.card p{color:var(--graphite);line-height:1.48;margin:0}.more{color:var(--red);font-weight:900;display:inline-flex;align-items:center;gap:8px}.more:after{content:"→"}.section{margin-top:24px;background:white;border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow);padding:clamp(24px,4vw,44px)}.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}.feature{background:var(--warm);border-radius:20px;padding:22px}.feature p{margin:0;color:var(--graphite);line-height:1.5}.yacht-images{display:grid;grid-template-columns:1.15fr .85fr;gap:14px;margin:24px 0 6px}.yacht-image{border-radius:20px;overflow:hidden;background:var(--warm);border:1px solid var(--line);box-shadow:0 12px 28px rgba(32,40,43,.08)}.yacht-image img{width:100%;height:100%;object-fit:cover;display:block}.yacht-image.layout img{object-fit:contain;background:#fff}.yacht-image.photo{min-height:260px}.yacht-image.layout{min-height:260px}.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}.fact{background:white;border:1px solid var(--line);border-radius:18px;padding:18px}.fact strong{display:block;font-size:24px;letter-spacing:-.04em;color:var(--red)}.fact span{color:var(--graphite);font-weight:800;font-size:13px}.footer{background:var(--graphite-dark);color:white;padding:38px 0}.footer-inner{width:min(1160px,calc(100% - 32px));margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}.footer h2{font-size:24px;margin-bottom:12px;letter-spacing:-.025em}.footer p{color:rgba(255,255,255,.74);line-height:1.55;margin-bottom:8px}.contacts{display:grid;gap:8px;justify-items:end;font-weight:800}.contacts a,.contacts span{color:white;padding:8px 0}.contacts small{color:rgba(255,255,255,.56);font-weight:600}.top{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;margin-bottom:28px}.filters{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}.filter{appearance:none;border:1px solid var(--line);background:white;color:var(--graphite-dark);padding:11px 14px;border-radius:999px;font-weight:900;cursor:pointer}.filter.active{background:var(--red);border-color:var(--red);color:white}.events{display:grid;gap:14px}.event{display:grid;grid-template-columns:180px 1fr auto;gap:22px;align-items:center;background:white;border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:22px}.date{min-height:108px;border-radius:18px;background:radial-gradient(circle at 85% 10%,rgba(255,255,255,.26),transparent 28%),linear-gradient(135deg,var(--graphite),var(--red));color:white;display:flex;flex-direction:column;justify-content:center;padding:18px;font-weight:900}.date .day{font-size:24px;line-height:1.05;letter-spacing:-.03em}.date .year{color:rgba(255,255,255,.72);margin-top:5px;font-size:13px}.event h2{font-size:25px;line-height:1.1;letter-spacing:-.035em;margin-bottom:10px}.meta{display:flex;flex-wrap:wrap;gap:8px;color:var(--graphite);font-size:14px;font-weight:800}.pill{display:inline-flex;align-items:center;padding:7px 10px;border-radius:999px;background:var(--warm)}.side{display:grid;gap:8px;justify-items:end;text-align:right;white-space:nowrap}.places{font-weight:900;font-size:18px;color:var(--red)}.price{font-weight:900;font-size:18px;color:var(--graphite-dark)}.message{background:white;border:1px solid var(--line);border-radius:24px;padding:24px;color:var(--graphite);box-shadow:var(--shadow)}@media(max-width:900px){.hero,.grid-2,.top,.yacht-images{grid-template-columns:1fr}.intro,.photo-card{min-height:auto}.photo-card{min-height:320px}.cards,.facts{grid-template-columns:1fr}.footer-inner{grid-template-columns:1fr}.contacts{justify-items:start}.nav a:not(.button){display:none}.filters{justify-content:flex-start}.event{grid-template-columns:1fr}.date{min-height:auto}.side{justify-items:start;text-align:left;white-space:normal}}@media(max-width:520px){.header-inner{height:68px;width:min(100% - 24px,1160px)}.main{width:min(100% - 24px,1160px);padding-top:20px}.logo img{width:118px}.intro{padding:28px 22px}.lead{font-size:18px}.btn{width:100%}.card-body{padding:20px}.filter{flex:1 1 auto}.event{padding:16px;border-radius:20px}}
-</style>
-</head>
-<body>
+   :root {
+  --graphite:#586063;
+  --graphite-dark:#20282B;
+  --red:#8F2726;
+  --red-dark:#6F1E1E;
+  --bg:#F7F8F8;
+  --card:#fff;
+  --warm:#F2F0ED;
+  --line:rgba(32, 40, 43, .12);
+  --shadow:0 18px 45px rgba(32, 40, 43, .09);
+  --radius:24px
+}
+* {
+  box-sizing:border-box
+}
+html {
+  scroll-behavior:smooth
+}
+body {
+  margin:0;
+  font-family:Inter, Arial, Helvetica, sans-serif;
+  color:var(--graphite-dark);
+  background:var(--bg)
+}
+a {
+  color:inherit;
+  text-decoration:none
+}
+.header {
+  position:sticky;
+  top:0;
+  z-index:10;
+  background:rgba(247, 248, 248, .9);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line)
+}
+.header-inner {
+  width:min(1160px, calc(100% - 32px));
+  margin:0 auto;
+  height:76px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px
+}
+.logo img {
+  width:138px;
+  display:block
+}
+.nav {
+  display:flex;
+  gap:10px;
+  font-size:14px;
+  font-weight:900;
+  color:var(--graphite);
+  white-space:nowrap
+}
+.nav a {
+  padding:10px 12px;
+  border-radius:999px
+}
+.nav a:hover {
+  background:var(--warm);
+  color:var(--graphite-dark)
+}
+.nav .button {
+  background:var(--red);
+  color:white
+}
+.nav .button:hover {
+  background:var(--red-dark);
+  color:white
+}
+.main {
+  width:min(1160px, calc(100% - 32px));
+  margin:0 auto;
+  padding:34px 0 72px
+}
+.eyebrow {
+  font-size:13px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  font-weight:900;
+  color:var(--red);
+  margin-bottom:14px
+}
+h1, h2, h3, p {
+  margin-top:0
+}
+h1 {
+  font-size:clamp(42px, 7vw, 78px);
+  line-height:.94;
+  letter-spacing:-.055em;
+  margin-bottom:20px
+}
+h2 {
+  font-size:clamp(28px, 4vw, 48px);
+  line-height:1;
+  letter-spacing:-.045em;
+  margin-bottom:14px
+}
+h3 {
+  font-size:22px;
+  line-height:1.1;
+  letter-spacing:-.03em;
+  margin-bottom:10px
+}
+.lead {
+  max-width:720px;
+  font-size:clamp(18px, 2.3vw, 25px);
+  line-height:1.34;
+  color:var(--graphite);
+  margin-bottom:28px
+}
+.text {
+  font-size:18px;
+  line-height:1.58;
+  color:var(--graphite);
+  max-width:820px
+}
+.hero {
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:28px;
+  align-items:stretch;
+  margin-bottom:28px
+}
+.intro {
+  min-height:470px;
+  border-radius:28px;
+  padding:clamp(28px, 5vw, 58px);
+  background:radial-gradient(circle at 92% 16%, rgba(143, 39, 38, .18), transparent 30%), linear-gradient(135deg, #fff 0%, #F2F0ED 100%);
+  box-shadow:0 22px 55px rgba(32, 40, 43, .12);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  overflow:hidden;
+  position:relative
+}
+.intro:after {
+  content:"";
+  position:absolute;
+  right:-90px;
+  bottom:-120px;
+  width:360px;
+  height:460px;
+  background:var(--graphite);
+  clip-path:polygon(84% 0, 100% 72%, 0 88%);
+  opacity:.13;
+  transform:rotate(7deg);
+  pointer-events:none
+}
+.actions {
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px
+}
+.btn {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:48px;
+  padding:13px 20px;
+  border-radius:999px;
+  font-weight:900;
+  font-size:15px;
+  border:1px solid transparent;
+  cursor:pointer
+}
+.btn-primary {
+  background:var(--red);
+  color:white
+}
+.btn-primary:hover {
+  background:var(--red-dark)
+}
+.btn-secondary {
+  border-color:var(--line);
+  background:white;
+  color:var(--graphite-dark)
+}
+.btn-secondary:hover {
+  background:var(--warm)
+}
+.photo-card {
+  min-height:470px;
+  border-radius:28px;
+  padding:28px;
+  box-shadow:0 22px 55px rgba(32, 40, 43, .12);
+  color:white;
+  background:linear-gradient(0deg, rgba(32, 40, 43, .78), rgba(32, 40, 43, .12)), url("img/adriatic-practice.jpg") center/cover no-repeat;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  overflow:hidden;
+  position:relative
+}
+.photo-card:after {
+  content:"";
+  position:absolute;
+  right:-90px;
+  bottom:-120px;
+  width:360px;
+  height:460px;
+  background:var(--red);
+  clip-path:polygon(84% 0, 100% 72%, 0 88%);
+  opacity:.16;
+  transform:rotate(7deg);
+  pointer-events:none
+}
+.photo-card h2, .photo-card p {
+  position:relative;
+  z-index:1
+}
+.photo-card p {
+  max-width:430px;
+  color:rgba(255, 255, 255, .82);
+  font-size:17px;
+  line-height:1.45;
+  margin:0
+}
+.cards {
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:18px
+}
+.card {
+  min-height:330px;
+  border-radius:24px;
+  background:white;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  border:1px solid var(--line)
+}
+.card-visual {
+  min-height:150px;
+  background:radial-gradient(circle at 78% 18%, rgba(255, 255, 255, .3), transparent 22%), linear-gradient(135deg, var(--graphite), var(--red));
+  position:relative
+}
+.card-visual.school {
+  background:linear-gradient(0deg, rgba(32, 40, 43, .28), rgba(32, 40, 43, .04)), linear-gradient(135deg, #7B8588, #D7D8D5)
+}
+.card-visual.iyt {
+  background:linear-gradient(0deg, rgba(32, 40, 43, .35), rgba(32, 40, 43, .05)), linear-gradient(135deg, #20282B, #586063)
+}
+.card-visual.calendar {
+  background:linear-gradient(0deg, rgba(32, 40, 43, .28), rgba(32, 40, 43, .05)), linear-gradient(135deg, #8F2726, #B96E5D)
+}
+.card-visual:after {
+  content:"";
+  position:absolute;
+  right:24px;
+  bottom:-22px;
+  width:116px;
+  height:140px;
+  background:rgba(255, 255, 255, .55);
+  clip-path:polygon(84% 0, 100% 78%, 0 88%);
+  transform:rotate(6deg)
+}
+.card-body {
+  flex:1;
+  padding:24px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  gap:18px
+}
+.card h2 {
+  font-size:25px;
+  line-height:1.05;
+  letter-spacing:-.035em;
+  margin-bottom:12px
+}
+.card p {
+  color:var(--graphite);
+  line-height:1.48;
+  margin:0
+}
+.more {
+  color:var(--red);
+  font-weight:900;
+  display:inline-flex;
+  align-items:center;
+  gap:8px
+}
+.more:after {
+  content:"→"
+}
+.section {
+  margin-top:24px;
+  background:white;
+  border:1px solid var(--line);
+  border-radius:28px;
+  box-shadow:var(--shadow);
+  padding:clamp(24px, 4vw, 44px)
+}
+.grid-2 {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px
+}
+.feature {
+  background:var(--warm);
+  border-radius:20px;
+  padding:22px
+}
+.feature p {
+  margin:0;
+  color:var(--graphite);
+  line-height:1.5
+}
+.yacht-images {
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:14px;
+  margin:24px 0 6px
+}
+.yacht-image {
+  border-radius:20px;
+  overflow:hidden;
+  background:var(--warm);
+  border:1px solid var(--line);
+  box-shadow:0 12px 28px rgba(32, 40, 43, .08)
+}
+.yacht-image img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block
+}
+.yacht-image.layout img {
+  object-fit:contain;
+  background:#fff
+}
+.yacht-image.photo {
+  min-height:260px
+}
+.yacht-image.layout {
+  min-height:260px
+}
+.facts {
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:12px;
+  margin-top:18px
+}
+.fact {
+  background:white;
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:18px
+}
+.fact strong {
+  display:block;
+  font-size:24px;
+  letter-spacing:-.04em;
+  color:var(--red)
+}
+.fact span {
+  color:var(--graphite);
+  font-weight:800;
+  font-size:13px
+}
+.footer {
+  background:var(--graphite-dark);
+  color:white;
+  padding:38px 0
+}
+.footer-inner {
+  width:min(1160px, calc(100% - 32px));
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:22px;
+  align-items:start
+}
+.footer h2 {
+  font-size:24px;
+  margin-bottom:12px;
+  letter-spacing:-.025em
+}
+.footer p {
+  color:rgba(255, 255, 255, .74);
+  line-height:1.55;
+  margin-bottom:8px
+}
+.contacts {
+  display:grid;
+  gap:8px;
+  justify-items:end;
+  font-weight:800
+}
+.contacts a, .contacts span {
+  color:white;
+  padding:8px 0
+}
+.contacts small {
+  color:rgba(255, 255, 255, .56);
+  font-weight:600
+}
+.top {
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:24px;
+  align-items:end;
+  margin-bottom:28px
+}
+.filters {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  justify-content:flex-end
+}
+.filter {
+  appearance:none;
+  border:1px solid var(--line);
+  background:white;
+  color:var(--graphite-dark);
+  padding:11px 14px;
+  border-radius:999px;
+  font-weight:900;
+  cursor:pointer
+}
+.filter.active {
+  background:var(--red);
+  border-color:var(--red);
+  color:white
+}
+.events {
+  display:grid;
+  gap:14px
+}
+.event {
+  display:grid;
+  grid-template-columns:180px 1fr auto;
+  gap:22px;
+  align-items:center;
+  background:white;
+  border:1px solid var(--line);
+  border-radius:24px;
+  box-shadow:var(--shadow);
+  padding:22px
+}
+.date {
+  min-height:108px;
+  border-radius:18px;
+  background:radial-gradient(circle at 85% 10%, rgba(255, 255, 255, .26), transparent 28%), linear-gradient(135deg, var(--graphite), var(--red));
+  color:white;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:18px;
+  font-weight:900
+}
+.date .day {
+  font-size:24px;
+  line-height:1.05;
+  letter-spacing:-.03em
+}
+.date .year {
+  color:rgba(255, 255, 255, .72);
+  margin-top:5px;
+  font-size:13px
+}
+.event h2 {
+  font-size:25px;
+  line-height:1.1;
+  letter-spacing:-.035em;
+  margin-bottom:10px
+}
+.meta {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  color:var(--graphite);
+  font-size:14px;
+  font-weight:800
+}
+.pill {
+  display:inline-flex;
+  align-items:center;
+  padding:7px 10px;
+  border-radius:999px;
+  background:var(--warm)
+}
+.side {
+  display:grid;
+  gap:8px;
+  justify-items:end;
+  text-align:right;
+  white-space:nowrap
+}
+.places {
+  font-weight:900;
+  font-size:18px;
+  color:var(--red)
+}
+.price {
+  font-weight:900;
+  font-size:18px;
+  color:var(--graphite-dark)
+}
+.message {
+  background:white;
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:24px;
+  color:var(--graphite);
+  box-shadow:var(--shadow)
+}
+@media(max-width:900px) {
+  .hero, .grid-2, .top, .yacht-images {
+    grid-template-columns:1fr
+  }
+  .intro, .photo-card {
+    min-height:auto
+  }
+  .photo-card {
+    min-height:320px
+  }
+  .cards, .facts {
+    grid-template-columns:1fr
+  }
+  .footer-inner {
+    grid-template-columns:1fr
+  }
+  .contacts {
+    justify-items:start
+  }
+  .nav a:not(.button) {
+    display:none
+  }
+  .filters {
+    justify-content:flex-start
+  }
+  .event {
+    grid-template-columns:1fr
+  }
+  .date {
+    min-height:auto
+  }
+  .side {
+    justify-items:start;
+    text-align:left;
+    white-space:normal
+  }
+}
+@media(max-width:520px) {
+  .header-inner {
+    height:68px;
+    width:min(100% - 24px, 1160px)
+  }
+  .main {
+    width:min(100% - 24px, 1160px);
+    padding-top:20px
+  }
+  .logo img {
+    width:118px
+  }
+  .intro {
+    padding:28px 22px
+  }
+  .lead {
+    font-size:18px
+  }
+  .btn {
+    width:100%
+  }
+  .card-body {
+    padding:20px
+  }
+  .filter {
+    flex:1 1 auto
+  }
+  .event {
+    padding:16px;
+    border-radius:20px
+  }
+}
+  </style>
+ </head>
+ <body>
   <header class="header">
-    <div class="header-inner">
-      <a class="logo" href="index.html" aria-label="StartSail"><img src="startsail-logo.svg" alt="StartSail" /></a>
-      <nav class="nav" aria-label="Навигация">
-        <a href="school.html">Школа</a>
-        <a href="iyt.html">IYT</a>
-        <a href="events.html" class="button">Календарь</a>
-      </nav>
-    </div>
+   <div class="header-inner">
+    <a aria-label="StartSail" class="logo" href="index.html">
+     <img alt="StartSail" src="startsail-logo.svg"/>
+    </a>
+    <nav aria-label="Навигация" class="nav">
+     <a href="school.html">
+      Школа
+     </a>
+     <a href="iyt.html">
+      IYT
+     </a>
+     <a class="button" href="events.html">
+      Календарь
+     </a>
+    </nav>
+   </div>
   </header>
-  
   <main class="main">
-    <section class="hero">
-      <div class="intro">
-        <div>
-          <div class="eyebrow">StartSail School</div>
-          <h1>Школа в Черногории</h1>
-          <p class="lead">StartSail работает в Тивате, в центре одной из самых удобных акваторий Адриатики.</p>
-        </div>
-        <div class="actions">
-          <a class="btn btn-primary" href="events.html">Выбрать событие</a>
-          <a class="btn btn-secondary" href="#yacht">Яхта курса</a>
-        </div>
+   <section class="hero">
+    <div class="intro">
+     <div>
+      <div class="eyebrow">
+       StartSail School
       </div>
-      <div class="photo-card">
-        <h2>Адриатика для практики</h2>
-        <p>Марины, острова, береговая навигация, швартовки и переходы — всё рядом и в реальных условиях.</p>
-      </div>
-    </section>
-
-    <section class="section">
-      <h2>Почему Черногория</h2>
-      <p class="text">Здесь удобно учиться с первого дня: короткие переходы, понятная береговая линия, красивые стоянки и достаточно морской практики, чтобы почувствовать яхту, ветер, экипаж и ответственность за маршрут.</p>
-      <div class="grid-2" style="margin-top:22px">
-        <div class="feature"><h3>Не учебный бассейн</h3><p>Обучение проходит на воде, с реальными манёврами, швартовками, погодой и навигацией.</p></div>
-        <div class="feature"><h3>Без лишней показухи</h3><p>Цель курса — не красивая легенда, а понятные навыки для самостоятельного выхода в море.</p></div>
-      </div>
-    </section>
-
-    <section class="section" id="yacht">
-      <h2>Яхта курса</h2>
-      <p class="text">Практика проходит на парусной яхте Salona 38 «Sparta». Это быстрая и живая яхта, достаточно комфортная для обучения и достаточно настоящая, чтобы сразу понимать, как работает морская практика.</p>
-      <div class="yacht-images" aria-label="Изображения яхты Salona 38">
-        <figure class="yacht-image photo"><img src="img/salona38_article_original_crop.jpg" alt="Salona 38 на воде"></figure>
-        <figure class="yacht-image layout"><img src="img/salona38_layout.jpg" alt="Планировка Salona 38"></figure>
-      </div>
-      <div class="facts">
-        <div class="fact"><strong>38 ft</strong><span>длина яхты</span></div>
-        <div class="fact"><strong>3</strong><span>каюты</span></div>
-        <div class="fact"><strong>1</strong><span>санузел</span></div>
-        <div class="fact"><strong>грот + стаксель</strong><span>основные паруса</span></div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer" id="contacts">
-    <div class="footer-inner">
-      <div>
-        <h2>Контакты</h2>
-        <p>Напишите, если хотите записаться на курс, уточнить свободные места или обсудить участие в регате.</p>
-      </div>
-      <div class="contacts">
-        <a href="mailto:info@startsail.ru">info@startsail.ru</a>
-        <span>Instagram: @start.sail</span>
-        <span>Telegram: StartSail</span>
-        <small>StartSail · Montenegro</small>
-      </div>
+      <h1>
+       Школа в Черногории
+      </h1>
+      <p class="lead">
+       StartSail работает в Тивате, в центре одной из самых удобных акваторий Адриатики.
+      </p>
+     </div>
+     <div class="actions">
+      <a class="btn btn-primary" href="events.html">
+       Выбрать событие
+      </a>
+      <a class="btn btn-secondary" href="#yacht">
+       Яхта курса
+      </a>
+     </div>
     </div>
+    <div class="photo-card">
+     <h2>
+      Адриатика для практики
+     </h2>
+     <p>
+      Марины, острова, самый большой фьорд Средиземноморья - великолепные пейзажи.
+     </p>
+    </div>
+   </section>
+   <section class="section">
+    <h2>
+     Почему Черногория
+    </h2>
+    <p class="text">
+     Одни из лучших условий для обучения: небольшие переходы, разнообразная береговая линия дают возможность получить достаточно морской практики, чтобы почувствовать яхту и ветер, научиться основам навигации и получить навыки для уверенного самостоятельного выхода в море на парусной яхте.
+    </p>
+    <div class="grid-2" style="margin-top:22px">
+     <div class="feature">
+      <h3>
+       Не учебный бассейн
+      </h3>
+      <p>
+       Обучение проходит в разных типах акватории, в закрытых бухтах и в открытом море, со множестовм манёвров, швартовками, погодой и навигацией.
+      </p>
+     </div>
+     <div class="feature">
+      <h3>
+       Работаем на результат
+      </h3>
+      <p>
+       Цель курса — не выдача "корочек", а знания и практические навыки для безопасного самостоятельного выхода в море.
+      </p>
+     </div>
+    </div>
+   </section>
+   <section class="section" id="yacht">
+    <h2>
+     Яхта курса
+    </h2>
+    <p class="text">
+     Практика проходит на собственной парусной яхте Salona 38 «Sparta». Это быстрая и комфортная яхта с богатым набором настроек, дает отличные возможности для обучения, путешествий и регат.
+    </p>
+    <div aria-label="Изображения яхты Salona 38" class="yacht-images">
+     <figure class="yacht-image photo">
+      <img alt="Salona 38 на воде" src="img/salona38_article_original_crop.jpg"/>
+     </figure>
+     <figure class="yacht-image layout">
+      <img alt="Планировка Salona 38" src="img/salona38_layout.jpg"/>
+     </figure>
+    </div>
+    <div class="facts">
+     <div class="fact">
+      <strong>
+       38 ft /11,6 м
+      </strong>
+      <span>
+       длина яхты
+      </span>
+     </div>
+     <div class="fact">
+      <strong>
+       3
+      </strong>
+      <span>
+       каюты
+      </span>
+     </div>
+     <div class="fact">
+      <strong>
+       1
+      </strong>
+      <span>
+       санузел
+      </span>
+     </div>
+     <div class="fact">
+      <strong>
+       грот + стаксель
+      </strong>
+      <span>
+       основные паруса
+      </span>
+     </div>
+    </div>
+   </section>
+  </main>
+  <footer class="footer" id="contacts">
+   <div class="footer-inner">
+    <div>
+     <h2>
+      Контакты
+     </h2>
+     <p>
+      Напишите, если хотите записаться на курс, уточнить свободные места или обсудить участие в регате.
+     </p>
+    </div>
+    <div class="contacts">
+     <a href="mailto:info@startsail.ru">
+      info@startsail.ru
+     </a>
+     <span>
+      Instagram: @start.sail
+     </span>
+     <span>
+      Telegram: StartSail
+     </span>
+     <small>
+      StartSail · Montenegro
+     </small>
+    </div>
+   </div>
   </footer>
-</body>
+ </body>
 </html>
