@@ -337,6 +337,30 @@ h2 {
   line-height:1.48;
   margin:0
 }
+.iyt-card-head {
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:18px;
+  align-items:center;
+  margin-bottom:12px
+}
+.iyt-card-head h2 {
+  margin-bottom:0
+}
+.iyt-card-logo {
+  display:block;
+  width:148px;
+  max-width:188px;
+  height:auto
+}
+@media(max-width:520px) {
+  .iyt-card-head {
+    gap:12px
+  }
+  .iyt-card-logo {
+    width:120px
+  }
+}
 .more {
   color:var(--red);
   font-weight:900;
@@ -522,9 +546,13 @@ h2 {
       </div>
       <div class="card-body">
        <div>
-        <h2>
-         Обучение по программе и сертификаты IYT
-        </h2>
+        <div class="iyt-card-head">
+         <h2>
+          Обучение по программе<br/>
+          и сертификаты IYT
+         </h2>
+         <img alt="IYT" class="iyt-card-logo" src="img/IYT_logo.svg"/>
+        </div>
         <p>
          IYT Bareboat Skipper и VHF Operator: теория, практика, безопасность, навигация и работа экипажа.
         </p>

@@ -167,6 +167,19 @@ h3 {
   transform:rotate(7deg);
   pointer-events:none
 }
+.iyt-hero-logo {
+  position:absolute;
+  top:30px;
+  right:34px;
+  width:132px;
+  max-width:28%;
+  height:auto;
+  z-index:2
+}
+.intro > div {
+  position:relative;
+  z-index:1
+}
 .actions {
   display:flex;
   flex-wrap:wrap;
@@ -550,6 +563,12 @@ h3 {
   .intro {
     padding:28px 22px
   }
+  .iyt-hero-logo {
+    width:96px;
+    top:22px;
+    right:22px;
+    max-width:34%
+  }
   .lead {
     font-size:18px
   }
@@ -591,6 +610,7 @@ h3 {
   <main class="main">
    <section class="hero">
     <div class="intro">
+     <img alt="IYT" class="iyt-hero-logo" src="img/IYT_logo.svg"/>
      <div>
       <div class="eyebrow">
        IYT Training
