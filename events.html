@@ -571,6 +571,10 @@ let mailFallbackTimer = null;
       return labels[type] || type;
     }
 
+    function principalRoleLabel(type) {
+      return type === 'training' ? 'Инструктор' : 'Шкипер';
+    }
+
     function priceLabel(price) {
       const clean = String(price || '').trim();
       if (!clean) return '';
@@ -612,7 +616,7 @@ let mailFallbackTimer = null;
               <div class="meta">
                 <span class="pill">${escapeHtml(typeLabel(event.type))}</span>
                 <span class="pill">${escapeHtml(event.location)}</span>
-                <span class="pill">Инструктор: ${escapeHtml(event.leader)}</span>
+                <span class="pill">${escapeHtml(principalRoleLabel(event.type))}: ${escapeHtml(event.leader)}</span>
               </div>
             </div>
             <div class="side">
